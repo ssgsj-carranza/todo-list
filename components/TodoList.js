@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Todo from './Todo';
 import TodoForm from './TodoForm';
 
 function TodoList() {
@@ -14,10 +15,22 @@ function TodoList() {
         setTodos(newTodos);
     }
 
+    const completeTodo = (id) => {
+        //toggle between true or false
+        let updatedTodos = todos.map((todo) => {
+            if(todo.id === id) {
+                todo.isComplete = !todo.isComplete
+            }
+            return todo
+        })
+        setTodos(updatedTodos);
+    }
+
   return (
     <div>
         <h1>TO-DO for {today}</h1>
-        <TodoForm />        
+        <TodoForm onSubmit={addTodo} />
+        <Todo todos={todos} completeTodo={completeTodo} />        
     </div>
   )
 }
