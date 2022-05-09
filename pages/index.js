@@ -15,3 +15,7 @@ export default function Home() {
     </div>
   )
 }
+
+
+// npm install --save next-auth
+// npm install firebase
