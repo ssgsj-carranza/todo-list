@@ -1,7 +1,10 @@
+import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 
 
 function Header() {
+    const {data: session} = useSession();
+
   return ( 
     <header className="flex justify-between p-5 max-w-7xl mx-auto">
       <div className="flex items-center space-x-5">
@@ -19,7 +22,10 @@ function Header() {
       </div>
       
       <div className='flex items-center space-x-5 text-emerald-800 cursor-pointer transition duration-200 ease-out'>
-        <h3 className='hover:shadow-lg rounded-full px-4 py-1'>Sign In</h3>
+        <button className='hover:shadow-lg rounded-full px-4 py-1'
+                onClick={session ? signOut : signIn}
+        >{session ? 'Sign Out' : 'Sign In'}
+        </button>
         <h3 className='border px-4 py-1 rounded-full border-emerald-200 hover:border-none hover:text-white hover:bg-emerald-200 transition duration-200 ease-out hover:shadow-lg'>Get Started</h3>
       </div>
     </header>
