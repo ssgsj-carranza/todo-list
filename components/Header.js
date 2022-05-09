@@ -22,11 +22,11 @@ function Header() {
       </div>
       
       <div className='flex items-center space-x-5 text-emerald-800 cursor-pointer transition duration-200 ease-out'>
-        <button className='hover:shadow-lg rounded-full px-4 py-1'
+        <button className='hover:shadow-lg rounded-full px-4 py-1 font-semibold'
                 onClick={session ? signOut : signIn}
         >{session ? 'Sign Out' : 'Sign In'}
         </button>
-        <h3 className='border px-4 py-1 rounded-full border-emerald-200 hover:border-none hover:text-white hover:bg-emerald-200 transition duration-200 ease-out hover:shadow-lg'>Get Started</h3>
+        <h3 className='border px-4 py-1 rounded-full border-emerald-200 hover:border-none hover:text-white hover:bg-emerald-200 transition duration-200 ease-out hover:shadow-lg font-semibold'>Get Started</h3>
       </div>
     </header>
   );
