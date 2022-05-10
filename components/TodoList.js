@@ -9,10 +9,17 @@ function TodoList() {
     const addTodo = (todo) => {
         //prevents long spaces from showing up ex: '         '
         if(!todo.text || /^\s*$/.test(todo.text)) {
-            return
+            return;
         }
         const newTodos = [todo, ...todos]
         setTodos(newTodos);
+    }
+
+    const updateTodo = (todoId, newValue) => {
+        if(!newValue.text || /^\s*$/.test(newValue.text)) {
+            return;
+        }
+        setTodos(previous => previous.map((item) => (item.id === todoId ? newValue : item)));
     }
 
     const completeTodo = (id) => {
@@ -30,13 +37,6 @@ function TodoList() {
         //checks in the array for the todo
         const removeArray = [...todos].filter((todo) => todo.id !== id)
         setTodos(removeArray);
-    }
-
-    const updateTodo = (todoId, newValue) => {
-        if(!newValue.text || /^\s*$/.test(newValue.text)) {
-            return;
-        }
-        setTodos((previous) => previous.map((item) => (item.id === todoId ? newValue : item)));
     }
 
   return (

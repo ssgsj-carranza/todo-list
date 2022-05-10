@@ -36,3 +36,4 @@ export default function Home() {
 // npm install --save next-auth
 // npm install firebase
 // npm install react-icons
+// npm install -g @sanity/cli
