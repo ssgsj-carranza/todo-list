@@ -1,38 +1,44 @@
-import React, {useState} from 'react'
-import {RiCloseCircleLine} from "react-icons/ri";
-import {TiEdit} from "react-icons/ti";
-import TodoForm from './TodoForm';
+import React, { useState } from 'react';
+import {CheckCircleIcon, PencilIcon, TrashIcon} from "@heroicons/react/outline";
 
-function Todo({todos, completeTodo, removeTodo, updateTodo}) {
-    const [edit, setEdit] = useState({id: null, value:''});
+export default function Todo({todo, toggleComplete, handleDelete, handleEdit}) {
+    const [newTitle, setNewTitle] = useState(todo.title);
 
-    const submitUpdate = (value) => {
-        updateTodo(edit.id, value)
-        setEdit({
-            id: null,
-            value: '',
-        });
+    const handleChange = (e) => {
+        e.preventDefault();
+        if(todo.complete === true) {
+            setNewTitle(todo.title);
+        }
+        else {
+            todo.title = "";
+            setNewTitle(e.target.value);
+        }
     };
 
-    if (edit.id) {
-        return <TodoForm edit={edit} onSubmit={submitUpdate} />;
-    }
-
-  return todos.map((todo, index) => (
-      <div className={todo.isComplete ? '' : 'is-complete'} key={index}>
-          <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-              {todo.text}
-          </div>
-          <div className=''>
-              <RiCloseCircleLine onClick={() => removeTodo(todo.id)} 
-                                 className=''
-              />
-              <TiEdit onClick={() => setEdit({id: todo.id, value: todo.text})} 
-                      className='' 
-              />
-          </div>
-      </div>
-  ));
-};
-
-export default Todo
+    return (
+        <div>
+            <input type='text'
+                   value={todo.title === "" ? newTitle : todo.title}
+                   className=''
+                   onChange={handleChange}
+            />
+            <div>
+                <button className=''
+                        onClick={() => toggleComplete(todo)}
+                >
+                    <CheckCircleIcon />
+                </button>
+                <button className=''
+                        onClick={() => handleEdit(todo, newTitle)}
+                >
+                    <PencilIcon />
+                </button>
+                <button className=''
+                        onClick={() => handleDelete(todo.id)}
+                >
+                    <TrashIcon />
+                </button>
+            </div>
+        </div>
+    );
+}

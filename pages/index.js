@@ -37,3 +37,9 @@ export default function Home() {
 // npm install firebase
 // npm install react-icons
 // npm install -g @sanity/cli
+// npm install next-sanity
+// npm install -g firebase-tools
+// npm install @mui/icons-material uninstalled?
+// npm install @emotion/styled not installed
+// npm install @emotion/react uninstalled
+// npm install @heroicons/react
