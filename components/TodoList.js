@@ -26,11 +26,17 @@ function TodoList() {
         setTodos(updatedTodos);
     }
 
+    const removeTodo = (id) => {
+        //checks in the array for the todo
+        const removeArray = [...todos].filter(todo => todo.id !== id)
+        setTodos(removeArray);
+    }
+
   return (
     <div>
         <h1>TO-DO for {today}</h1>
         <TodoForm onSubmit={addTodo} />
-        <Todo todos={todos} completeTodo={completeTodo} />        
+        <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} />        
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {RiCloseCircleLine} from "react-icons/ri";
 import {TiEdit} from "react-icons/ti";
 
-function Todo({todos, completeTodo}) {
+function Todo({todos, completeTodo, removeTodo}) {
     const [edit, setEdit] = useState({id: null, value:''});
 
   return todos.map((todo, index) => (
