@@ -28,15 +28,22 @@ function TodoList() {
 
     const removeTodo = (id) => {
         //checks in the array for the todo
-        const removeArray = [...todos].filter(todo => todo.id !== id)
+        const removeArray = [...todos].filter((todo) => todo.id !== id)
         setTodos(removeArray);
+    }
+
+    const updateTodo = (todoId, newValue) => {
+        if(!newValue.text || /^\s*$/.test(newValue.text)) {
+            return;
+        }
+        setTodos((previous) => previous.map((item) => (item.id === todoId ? newValue : item)));
     }
 
   return (
     <div>
         <h1>TO-DO for {today}</h1>
         <TodoForm onSubmit={addTodo} />
-        <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} />        
+        <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} updateTodo={updateTodo} />        
     </div>
   )
 }
