@@ -42,14 +42,16 @@ function todo() {
         <div>
           <AddTodo />
         </div>
-        <div>
+        <div className='pt-10 grid place-items-center'>
           {todos.map((todo) => (
+            <div>
             <Todo key ={todo.id}
                   todo={todo}
                   toggleComplete={toggleComplete}
                   handleDelete={handleDelete}
                   handleEdit={handleEdit}
             />
+            </div>
           ))}
         </div>   
     </div>
