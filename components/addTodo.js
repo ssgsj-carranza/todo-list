@@ -18,7 +18,7 @@ export default function AddTodo() {
 
     return (
         <form onSubmit={handleSubmit} className='flex flex-col items-center pt-10  py-2 px-14 text-center'>
-            <div className='sm:flex items-center md:border-2 rounded-full py-2 md:shadow-sm cursor-pointer bg-gradient-to-br from-gray-200 to-white'>
+            <div className='sm:flex flex-grow items-center md:border-2 rounded-full py-2 md:shadow-sm cursor-pointer bg-gradient-to-br from-gray-200 to-white'>
                 <input type='text' 
                        placeholder='Enter task' 
                        value={title} 

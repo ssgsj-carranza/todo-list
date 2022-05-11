@@ -43,3 +43,4 @@ export default function Home() {
 // npm install @emotion/styled not installed
 // npm install @emotion/react uninstalled
 // npm install @heroicons/react
+// npm install flowbite uninstalled
