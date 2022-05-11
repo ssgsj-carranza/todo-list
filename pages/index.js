@@ -1,9 +1,41 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import AddList from '../components/addList'
 import Header from '../components/Header'
 import styles from '../styles/Home.module.css'
+import {collection, query, onSnapshot, doc, updateDoc, deleteDoc} from "firebase/firestore";
+import {db} from "../firebase";
 
 export default function Home() {
+  const [lists, setLists] = useState([]);
+
+  useEffect(() => {
+    const q = query(collection(db, "lists"));
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      let listsArray = [];
+      querySnapshot.forEach((doc) => {
+        listsArray.push({...doc.data(), id: doc.id});
+      });
+      setLists(listsArray);
+    });
+    return () => unsub();
+  }, []);
+
+  const handleEdit = async (list, title) => {
+    await updateDoc(doc(db, "lists", list.id), {title: title});
+  };
+
+  const toggleComplete = async (list) => {
+    await updateDoc(doc(db, "lists", list.id), {
+      completed: !list.completed
+    });
+  }
+
+  const handleDelete = async (id) => {
+    await deleteDoc(doc(db, "lists", id));
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,7 +51,7 @@ export default function Home() {
             <span className='overline decoration-black decoration-4'>TO-DO</span> is a place to plan, do, accomplish
           </h1>
           <h2 className='italic'>
-            It's easy to create a custome to-do list to cater your needs. Connect with millions of others already DOING. 
+            It's easy to create a custom to-do list to cater your needs. Connect with millions of others already DOING. 
           </h2>
         </div>
 
@@ -27,6 +59,20 @@ export default function Home() {
              src="https://images.unsplash.com/photo-1642543492457-39a2ce63bb59?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
              alt="" 
         />  
+      </div>
+      {/* lists */}
+      <AddList />
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 p-2 md:p-6'>
+        {lists.map((list) => (
+          <div>
+            {/* <List key ={list.id}
+                  todo={list}
+                  toggleComplete={toggleComplete}
+                  handleDelete={handleDelete}
+                  handleEdit={handleEdit}
+            /> */}
+          </div>
+        ))}
       </div>
     </div>
   )
@@ -36,8 +82,8 @@ export default function Home() {
 // npm install --save next-auth
 // npm install firebase
 // npm install react-icons
-// npm install -g @sanity/cli
-// npm install next-sanity
+// npm install -g @sanity/cli uninstalled
+// npm install next-sanity uninstalled
 // npm install -g firebase-tools
 // npm install @mui/icons-material uninstalled?
 // npm install @emotion/styled not installed
