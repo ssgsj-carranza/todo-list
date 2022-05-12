@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import AddList from '../components/addList'
 import Header from '../components/Header'
 import styles from '../styles/Home.module.css'
 import {collection, query, onSnapshot, doc, updateDoc, deleteDoc} from "firebase/firestore";
 import {db} from "../firebase";
+import List from "../components/List";
 
 export default function Home() {
   const [lists, setLists] = useState([]);
@@ -65,12 +65,12 @@ export default function Home() {
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 p-2 md:p-6'>
         {lists.map((list) => (
           <div>
-            {/* <List key ={list.id}
-                  todo={list}
-                  toggleComplete={toggleComplete}
+            <List key ={list.id}
+                  list={list}
+                  // toggleComplete={toggleComplete}
                   handleDelete={handleDelete}
                   handleEdit={handleEdit}
-            /> */}
+            />
           </div>
         ))}
       </div>

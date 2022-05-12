@@ -3,16 +3,16 @@ import {db} from "../firebase";
 import {collection, addDoc} from "firebase/firestore";
 
 export default function AddList() {
-    const [listTitle, setListTitle] = useState("");
+    const [title, setTitle] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(listTitle !== "") {
+        if(title !== "") {
             await addDoc(collection(db, "lists"), {
-                listTitle,
+                title,
                 created: true,
             });
-            setListTitle("");
+            setTitle("");
         }
     };
 
@@ -21,8 +21,8 @@ export default function AddList() {
             <div className='sm:flex flex-grow items-center md:border-2 rounded-full py-2 md:shadow-sm cursor-pointer bg-gradient-to-br from-gray-200 to-white'>
                 <input type='text' 
                        placeholder='Create New List' 
-                       value={listTitle} 
-                       onChange={(e) => setListTitle((e.target.value))}
+                       value={title} 
+                       onChange={(e) => setTitle((e.target.value))}
                        className='flex-grow pl-5 bg-transparent outline-none text-sm text-gray-600 placeholder-gray-400'
                 />
             </div>
