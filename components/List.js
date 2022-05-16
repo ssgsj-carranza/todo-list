@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import {CheckCircleIcon, XCircleIcon, TrashIcon, SaveIcon} from "@heroicons/react/outline";
+import {CheckCircleIcon, XCircleIcon, TrashIcon, SaveIcon, ArrowCircleRightIcon} from "@heroicons/react/outline";
+import Link from 'next/link';
 
-export default function Todo({list, toggleComplete, handleDelete, handleEdit}) {
+
+export default function List({list, toggleComplete, handleDelete, handleEdit, id}) {
     const [newTitle, setNewTitle] = useState(list.title);
     const [isHovered, setIsHovered] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
@@ -54,6 +56,11 @@ export default function Todo({list, toggleComplete, handleDelete, handleEdit}) {
                     <button onClick={() => handleDelete(list.id)}>
                         <TrashIcon className="h-5 w-5 hover:scale-150 transition duration-200 ease-in-out cursor-pointer" />
                     </button>
+                    <Link href={`/todo/${list.id}`}>
+                        <button>
+                            <ArrowCircleRightIcon className="h-5 w-5 hover:scale-150 transition duration-200 ease-in-out cursor-pointer" />
+                        </button>
+                    </Link>
                 </div>
             ) : (
                 <div className="relative text-indigo-800 focus-within:text-gray-400">

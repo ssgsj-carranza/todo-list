@@ -1,14 +1,30 @@
 import React, { useState } from 'react';
 import {db} from "../firebase";
-import {collection, addDoc} from "firebase/firestore";
+import {collection, addDoc, doc, getDocs, query} from "firebase/firestore";
+import { useSession } from 'next-auth/react' ;
 
-export default function AddTodo() {
+
+export default function AddTodo({id}) {
     const [title, setTitle] = useState("");
+    const {data: session} = useSession();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // const q = query(collection(db, 'lists'));
+        // const querySnapshot =await getDocs(querySnapshot);
+        // const queryData = querySnapshot.docs.map((detail) => ({
+        //     ...detail.data(),
+        //     id: detail.id,
+        // }));
+        // console.log(queryData);
+        // queryData.map(async (v) => {
+        //     await setDoc(doc(db, `lists/${v.id}/todos`), {
+        //         title,
+        //         completed: false,
+        //     });
+        // })
         if(title !== "") {
-            await addDoc(collection(db, "todos"), {
+            await addDoc(collection(db, 'todos'), {
                 title,
                 completed: false,
             });

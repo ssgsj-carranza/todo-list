@@ -26,7 +26,13 @@ function Header() {
                 onClick={session ? signOut : signIn}
         >{session ? 'Sign Out' : 'Sign In'}
         </button>
-        <h3 className='border px-4 py-1 rounded-full border-indigo-400 hover:border-none hover:text-white hover:bg-indigo-400 transition duration-200 ease-out hover:shadow-lg font-semibold'>Get Started</h3>
+        {!session ? (
+          <button className='hidden'>Get Started</button>
+        ) : (
+          <Link href={'/subscribe'}>
+            <button className='border px-4 py-1 rounded-full border-indigo-400 hover:border-none hover:text-white hover:bg-indigo-400 transition duration-200 ease-out hover:shadow-lg font-semibold'>Get Started</button>
+          </Link>
+        )}
       </div>
     </header>
   );
